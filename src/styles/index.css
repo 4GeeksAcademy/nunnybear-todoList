@@ -10,3 +10,37 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+body{
+    margin-top:100px;
+    background-color: rgb(245, 245, 245);
+}
+.container{
+    height: 200px;
+    width: 300px;
+    background-color: white;
+}
+h2{
+    text-align:center;
+
+}
+ul{
+    padding:0;
+    padding-top: 10px;
+}
+ul li{
+    border:1px solid grey;
+    border-top:none;
+    border-left: none;
+    border-right: none;
+    border-bottom: .2px solid rgb(255, 227, 231);
+    list-style: none;
+    
+}
+input{
+    border:none;
+    outline: none;
+    font-weight: lighter;
+}
+.itemCounter{
+    font-size:10px;
+}
