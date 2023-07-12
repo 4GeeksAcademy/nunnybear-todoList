@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 
 //create your first component
 const ToDoList = () => {
+	const [todos, setTodos] = useState([])
+	const [userInput, setUserInput] = useState("")
+
+	const addTodo = (onKeyDownEvent) => {
+		if (onKeyDownEvent.key === "Enter"){
+			const newTodoList = [...todos, userInput]
+			setTodos(newTodoList)
+			setUserInput("")
+		}
+	}
+
+	const removeTodo = (index) => {
+		const newTodoList = todos.filter((todos,i) => {i != index})
+		setTodos(newTodoList)
+	}
 
 	return (
 		<>
@@ -11,16 +26,27 @@ const ToDoList = () => {
 		
 			<ul>
 				<li>
-				<input type="text" id="taskData" placeholder="What to do today?"></input>
+				<input 
+				type="text"
+				id="taskData"
+				onChange={(event)=> setUserInput(event.target.value)}
+				onKeyDown={addTodo}
+				placeholder="What to do today?"
+				></input>
 				</li>
+				{todos.map((todos, index) => {
+					return (
+						<li key={index}>
+							{console.log(todos, "hey")}
+							- {todos}
+							<div onClick={() => removeTodo(index)}><i class="bi bi-trash-fill"></i></div>
+						</li>
+					)
+				})}
 			</ul>
-			<div className="itemCounter"> item(s) left..</div>
+			<div className="itemCounter"> {todos.length} left..</div>
 		</div>
 		</>
 	);
 };
-function getTodo(){
-	var t = document.getElementById("#taskData").value;
-	document.getElementById("itemCounter").innerHTML = t;
-}
 export default ToDoList;

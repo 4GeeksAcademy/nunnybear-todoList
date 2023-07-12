@@ -34,7 +34,6 @@ ul li{
     border-right: none;
     border-bottom: .2px solid rgb(255, 227, 231);
     list-style: none;
-    
 }
 input{
     border:none;
@@ -43,4 +42,8 @@ input{
 }
 .itemCounter{
     font-size:10px;
+}
+i{
+    margin-left: 250px;
+    padding-right:20px;
 }
