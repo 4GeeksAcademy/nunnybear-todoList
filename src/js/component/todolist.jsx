@@ -1,50 +1,31 @@
 import React, { useState } from "react";
 
-
 //create your first component
 const ToDoList = () => {
-	const [todos, setTodos] = useState([])
-	const [userInput, setUserInput] = useState("")
 
-	const addTodo = (onKeyDownEvent) => {
-		if (onKeyDownEvent.key === "Enter"){
-			const newTodoList = [...todos, userInput]
-			setTodos(newTodoList)
-			setUserInput("")
-		}
-	}
-
-	const removeTodo = (index) => {
-		const newTodoList = todos.filter((todos,i) => {i != index})
-		setTodos(newTodoList)
-	}
+	const [inputValue, setInputValue] = useState("")
+	const [todos, setTodos] = useState([]);
 
 	return (
 		<>
 			<h2>Todo List</h2>
 		<div className="container">
-		
-			<ul>
-				<li>
-				<input 
-				type="text"
-				id="taskData"
-				onChange={(event)=> setUserInput(event.target.value)}
-				onKeyDown={addTodo}
-				placeholder="What to do today?"
-				></input>
-				</li>
-				{todos.map((todos, index) => {
-					return (
-						<li key={index}>
-							{console.log(todos, "hey")}
-							- {todos}
-							<div onClick={() => removeTodo(index)}><i class="bi bi-trash-fill"></i></div>
-						</li>
-					)
-				})}
-			</ul>
-			<div className="itemCounter"> {todos.length} left..</div>
+		<input type="text" onChange={(e) => setInputValue(e.target.value)}
+			value={inputValue}
+			onKeyPress={(e) => {
+				if (e.key === "Enter"){
+					setTodos(todos.concat(inputValue));
+					setInputValue("");
+				}
+			}
+			}
+		 placeholder="What To Do?"></input>
+		 {todos.map((item, index) => (
+			<li>
+				{item} <i class="bi bi-x-square" onClick={() => setTodos(todos.filter((t, currentIndex) => index != currentIndex))}></i>
+			</li>
+		 ))}
+		 <div className="itemCounter">{todos.length} task left to do...</div>
 		</div>
 		</>
 	);
